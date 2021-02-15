@@ -1,0 +1,61 @@
+﻿<Window x:Class="TextParser.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextParser"
+        mc:Ignorable="d"
+        Title="Text Parser" Height="154" Width="520">
+
+    <Window.Resources>
+        <Style x:Key="MyWaterMarkStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border Background="White" BorderBrush="#FF7D8683" BorderThickness="1"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="5,0,0,0" VerticalAlignment="Center" />
+                            <Label Margin="5,0,0,0" x:Name="WaterMarkLabel" Content="{TemplateBinding Tag}" VerticalAlignment="Center"
+                               Visibility="Collapsed" Foreground="Gray" FontFamily="Arial"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Visibility" TargetName="WaterMarkLabel" Value="Visible"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="DimGray"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Button x:Name="btn_from_path" Content="From" HorizontalAlignment="Left" Margin="265,13,0,0" VerticalAlignment="Top" Width="75" Click="btn_from_path_Click"/>
+
+
+        <TextBox Style="{StaticResource MyWaterMarkStyle}" x:Name="txtbox_from_path" HorizontalAlignment="Left" 
+                 Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="243"
+                 Tag="Path to read from" IsEnabled="False" />
+
+
+        <TextBox Style="{StaticResource MyWaterMarkStyle}" x:Name="txtbox_to_path" HorizontalAlignment="Left" 
+                 Height="23" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="243"
+                 Tag="Path to write to" IsEnabled="False"/>
+        
+        
+        
+        <Button x:Name="btn_to_path" Content="To" HorizontalAlignment="Left" Margin="265,46,0,0" VerticalAlignment="Top" Width="75" Click="btn_to_path_Click"/>
+        <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="20" Margin="10,83,0,0" VerticalAlignment="Top" Width="330"/>
+        <Button x:Name="btn_start" Content="Start" HorizontalAlignment="Left" Margin="345,83,0,0" VerticalAlignment="Top" Width="75" Click="btn_start_Click" IsEnabled="False"/>
+        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="425,83,0,0" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click"/>
+        <RadioButton x:Name="export_txt" Content="export as .txt" HorizontalAlignment="Left" Margin="381,18,0,0" VerticalAlignment="Top" GroupName="export" IsChecked="True" Click="export_txt_Click"/>
+        <RadioButton x:Name="export_excel" Content="export as .xls" HorizontalAlignment="Left" Margin="381,38,0,0" VerticalAlignment="Top" GroupName="export" Click="export_excel_Click"/>
+
+    </Grid>
+</Window>
