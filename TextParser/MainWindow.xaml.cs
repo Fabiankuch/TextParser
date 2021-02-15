@@ -51,7 +51,6 @@ namespace TextParser
                 }
             }
         }
-
         private void btn_start_Click(object sender, RoutedEventArgs e)
         {
             string mode = ""; 
